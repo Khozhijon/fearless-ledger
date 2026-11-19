@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fearless Ledger · LoL draft and macro scouting</title>
+  <meta name="description" content="Draft and early-macro scouting for League of Legends coaches, built for Cloud9 Kia from official GRID match data. Fearless-ready series board.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1220'/%3E%3Cpath d='M8 23V9h11M8 16h8M22 9v14h4' stroke='%2367c6ff' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">FL</span>
+      <div><h1>Fearless Ledger</h1><p>Draft and early-macro scouting for Cloud9 Kia's coaches</p></div>
+    </div>
+    <p id="pack-note" class="pack-note">Loading the scouting pack…</p>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <footer class="foot">
+    <p>Match data provided by GRID for the Cloud9 × JetBrains “Sky's The Limit” hackathon. League of Legends is a trademark of Riot Games, Inc. Not endorsed by Riot Games, Cloud9 or GRID. Built with PyCharm and Claude Code. <a href="https://github.com/Khozhijon/fearless-ledger">Source</a></p>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

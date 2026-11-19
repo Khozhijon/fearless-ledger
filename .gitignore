@@ -1,0 +1,24 @@
+# Sky's The Limit 2026 hackathon data: licensed, must not be committed
+stl-hackathon-2026-grid-starter/
+*.zst
+*.jsonl
+*.parquet
+*.sqlite
+*.duckdb
+# Everything the pipeline derives from the data stays local
+packs/
+
+node_modules/
+site/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/
+submission/video-tmp/
+submission/DEVPOST.md
+# PyCharm: keep the shared project files, not the personal ones
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/dataSources.local.xml
+inspections/

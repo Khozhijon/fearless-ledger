@@ -1,0 +1,24 @@
+{
+  "problems": [
+    {
+      "file": "file://$PROJECT_DIR$/pipeline/ledger/geo.py",
+      "line": 4,
+      "offset": 32,
+      "length": 8,
+      "module": "cloud9",
+      "problem_class": {
+        "name": "Grammar",
+        "id": "GrazieInspection",
+        "severity": "GRAMMAR_ERROR",
+        "attribute_key": "GRAMMAR_ERROR"
+      },
+      "entry_point": {
+        "TYPE": "file",
+        "FQNAME": "file://$PROJECT_DIR$/pipeline/ledger/geo.py"
+      },
+      "highlighted_element": "mid lane",
+      "language": "Python",
+      "description": "This word is normally spelled with a hyphen."
+    }
+  ]
+}

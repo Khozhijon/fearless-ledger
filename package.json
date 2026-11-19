@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "fearless-ledger",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.ts",
+    "dev": "node tools/build.ts --dev && node tools/serve.ts",
+    "test": "tsc --noEmit && node --test \"tests/*.test.ts\"",
+    "test:py": "cd pipeline && python3 -m unittest",
+    "pipeline": "cd pipeline && python3 -m ledger.build && python3 -m ledger.pack && python3 -m ledger.pack --all --evidence"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

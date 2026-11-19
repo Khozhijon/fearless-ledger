@@ -1,0 +1,44 @@
+{
+  "problems": [
+    {
+      "file": "file://$PROJECT_DIR$/pipeline/ledger/pack.py",
+      "line": 7,
+      "offset": 59,
+      "length": 7,
+      "module": "cloud9",
+      "problem_class": {
+        "name": "Style",
+        "id": "GrazieStyle",
+        "severity": "STYLE_SUGGESTION",
+        "attribute_key": "TEXT_STYLE_SUGGESTION"
+      },
+      "entry_point": {
+        "TYPE": "file",
+        "FQNAME": "file://$PROJECT_DIR$/pipeline/ledger/pack.py"
+      },
+      "highlighted_element": "licence",
+      "language": "Python",
+      "description": "American English uses \u0027license\u0027"
+    },
+    {
+      "file": "file://$PROJECT_DIR$/pipeline/ledger/aggregate.py",
+      "line": 6,
+      "offset": 52,
+      "length": 7,
+      "module": "cloud9",
+      "problem_class": {
+        "name": "Style",
+        "id": "GrazieStyle",
+        "severity": "STYLE_SUGGESTION",
+        "attribute_key": "TEXT_STYLE_SUGGESTION"
+      },
+      "entry_point": {
+        "TYPE": "file",
+        "FQNAME": "file://$PROJECT_DIR$/pipeline/ledger/aggregate.py"
+      },
+      "highlighted_element": "licence",
+      "language": "Python",
+      "description": "American English uses \u0027license\u0027"
+    }
+  ]
+}
