@@ -12,6 +12,10 @@ gank before 8:00, and what Cloud9 should ban. Every number shows how many games 
 
 **Try it:** https://khozhijon.github.io/fearless-ledger/ (public demo: Cloud9 Kia and its LCS 2026 rivals)
 
+**Demo video (2:17):** https://youtu.be/EFoBdUGaAjc
+
+![Fearless Ledger scouting report: whiteboard of habits with the evidence behind each](submission/1-whiteboard.png)
+
 ## What it does
 
 - **Scouting report.** For any team, period (2025–26 or the latest season) and side:
