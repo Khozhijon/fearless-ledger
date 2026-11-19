@@ -22,3 +22,4 @@ submission/DEVPOST.md
 .idea/shelf/
 .idea/dataSources.local.xml
 inspections/
+.venv/

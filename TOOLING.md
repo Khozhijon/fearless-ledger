@@ -3,14 +3,14 @@
 Which tools built Fearless Ledger, and exactly what each one did. The entry was built by one
 person working with an AI coding agent; this file says which part is whose.
 
-## JetBrains PyCharm 2026.3 (free tier, macOS)
+## JetBrains PyCharm 2026.3 (macOS; the free 30-day Pro trial, which falls back to the free tier, no payment)
 
 PyCharm is the project's IDE for the Python data pipeline, the part that turns GRID's raw event
 feeds into everything the app shows. The `.idea/` folder is committed so the setup is reproducible.
 
 | What | Where | What it did |
 |---|---|---|
-| Project model | `.idea/cloud9.iml`, `.idea/modules.xml`, `.idea/misc.xml` | `pipeline/` is a source root, `pipeline/tests/` a test root, and the derived-data folder `packs/`, `node_modules/` and `site/` are excluded from indexing. The project interpreter is "Python 3" (3.15). |
+| Project model | `.idea/fearless-ledger-pipeline.iml`, `.idea/modules.xml`, `.idea/misc.xml`, `pyproject.toml` | `pipeline/` is a source root, `pipeline/tests/` a test root, and the derived-data folder `packs/`, `node_modules/`, `site/` and `.venv/` are excluded from indexing. PyCharm picked up `pyproject.toml` and the project's `.venv` (Python 3.15, created with uv) as the interpreter by itself. |
 | Run configurations | `.idea/runConfigurations/*.xml` | One per pipeline step: "1. Build game records" (all 745 series), "1a. Build sample (20 series, for debugging)", "2. Public demo pack (aggregates only)", "3. Local pack (every team, with game lists)", and "Pipeline tests" (unittest). They set `STL_DATA_DIR` to the data clone next to the project, so the licensed data is read in place and never enters the repository. |
 | Code inspections | `tools/pycharm-inspect.sh`, `.idea/inspectionProfiles/Project_Default.xml`, [`docs/pycharm-inspections.md`](docs/pycharm-inspections.md) | PyCharm's headless inspector (`inspect.sh`) checked the pipeline with the shared profile. The first run found 35 problems, including 25 type errors from tallies that mixed ints, lists and Counters in one dict, a `None` position that could be indexed, and a variable shadowing the module's `main()`. All code findings were fixed (dataclasses, guards, renames) and the run repeated until only three deliberate wording notes remained. The aggregate output was checked to be identical before and after. The JSON reports are in `docs/inspections-latest/`. |
 | Inspection profile | `.idea/inspectionProfiles/` | The project profile is shared (PEP 8 on, line length relaxed to the project's style, spell-checking off because champion and player names are not dictionary words). |
