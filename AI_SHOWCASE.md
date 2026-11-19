@@ -37,7 +37,8 @@ lineup, and former players are marked in the report.
 
 ## 4. Use the IDE's inspections as a second reviewer
 
-PyCharm opened the project and its headless inspector was run with a shared profile
+PyCharm opened the project, detected its `pyproject.toml` and uv `.venv` as the interpreter, and
+ran the full 745-series build from the shared run configuration. Its headless inspector was run with a shared profile
 (`tools/pycharm-inspect.sh`). Its first report had 35 findings; 25 were type errors from tallies
 that mixed ints, lists and Counters in one dict, which the agent had written for speed. They became
 three dataclasses, a possibly-`None` position index got a guard, and a variable shadowing `main()`
