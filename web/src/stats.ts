@@ -48,7 +48,7 @@ export function insights(teamName: string, s: FullSlice): Insight[] {
   const firstBan = s.bans.blue.phase1[0]
   if (firstBan && blueGames) out.push({topic: 'draft', text: `Their most common phase-one ban on blue side is ${firstBan[0]}.`, evidence: `${firstBan[1]} of ${blueGames} blue-side drafts`, confidence: confidence(blueGames)})
   const respected = [...s.champs].sort((a, b) => b.bans_vs - a.bans_vs)[0]
-  if (respected && respected.bans_vs >= 3) out.push({topic: 'draft', text: `Opponents ban ${respected.champ} against them more than any other champion; they won ${pct(respected.wins, respected.picks)}% of the ${respected.picks} games they got it.`, evidence: `banned in ${respected.bans_vs} of ${s.games} games`, confidence: confidence(s.games)})
+  if (respected && respected.bans_vs >= 3) out.push({topic: 'draft', text: `Opponents ban ${respected.champ} against them more than any other champion; they won ${pct(respected.wins, respected.picks)}% of the ${respected.picks} games they got it.`, evidence: `${respected.wins} wins in ${respected.picks} games; banned in ${respected.bans_vs} of ${s.games} games`, confidence: confidence(s.games)})
   const phase2 = dominant(s.ban_roles.phase2)
   if (phase2) out.push({topic: 'draft', text: `Their phase-two bans target ${phase2[0]} champions ${pct(phase2[1], phase2[2])}% of the time: expect your remaining ${phase2[0]} picks to be denied.`, evidence: `${phase2[1]} of ${phase2[2]} phase-two bans`, confidence: confidence(phase2[2] / 2)})
 
@@ -90,7 +90,7 @@ export function insights(teamName: string, s: FullSlice): Insight[] {
   for (const player of currentPlayers(s.players, s.last_date).filter(p => p.games >= 8)) {
     const [best] = player.champs
     if (best && best.games / player.games >= 0.25) {
-      out.push({topic: 'players', text: `${player.name} (${player.role}) plays ${best.champ} in ${pct(best.games, player.games)}% of games and wins ${pct(best.wins, best.games)}% on it.`, evidence: `${best.games} of ${player.games} games`, confidence: confidence(player.games)})
+      out.push({topic: 'players', text: `${player.name} (${player.role}) plays ${best.champ} in ${pct(best.games, player.games)}% of games and wins ${pct(best.wins, best.games)}% on it.`, evidence: `${best.games} of ${player.games} games; ${best.wins} wins in ${best.games} games`, confidence: confidence(player.games)})
     }
   }
   return out
@@ -146,7 +146,7 @@ export function banSuggestions(opponent: FullSlice, us: FullSlice | null, unavai
   for (const player of currentPlayers(opponent.players, reference)) {
     if (player.games < 3) continue
     for (const c of player.champs.slice(0, 6)) {
-      add(c.champ, player.role, comfort(c, reference), `${player.name}: ${c.games} games, ${pct(c.wins, c.games)}% wins, last ${c.last}`)
+      add(c.champ, player.role, comfort(c, reference), `${player.name}: ${c.games} games, ${c.wins} wins (${pct(c.wins, c.games)}% wins), last ${c.last}`)
     }
   }
   for (const row of opponent.champs) {

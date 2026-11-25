@@ -1,13 +1,13 @@
-// Fearless Ledger: loads a scouting pack and renders the four views.
+// Fearless Ledger: loads a scouting pack and renders the scouting views.
 import * as board from './board.ts'
 import {boardView} from './boardView.ts'
 import {html} from './html.ts'
 import {championNames} from './stats.ts'
 import {isFull, sliceOf, type Pack, type Role, type Side} from './types.ts'
-import {methodView, prepView, scoutView, type View} from './views.ts'
+import {methodView, prepView, scoutView, sheetView, type View} from './views.ts'
 
-type Tab = 'scout' | 'prep' | 'board' | 'method'
-const TABS: [Tab, string][] = [['scout', 'Scouting report'], ['prep', 'Draft prep'], ['board', 'Series board'], ['method', 'Method & data']]
+type Tab = 'scout' | 'prep' | 'sheet' | 'board' | 'method'
+const TABS: [Tab, string][] = [['scout', 'Scouting report'], ['prep', 'Draft prep'], ['sheet', 'Scouting sheet'], ['board', 'Series board'], ['method', 'Method & data']]
 const STORE = 'fearless-ledger:series'
 
 interface State {
@@ -98,7 +98,7 @@ function render() {
     body = html`<section class="panel"><h2>${team.name}</h2><p>No games for ${team.name} in this period and side. Try “2025–26” or “Both sides”.</p></section>`
   } else {
     const view: View = {pack, team, home, period: state.period, side: state.side, slice, homeSlice: isFull(homeSlice) ? homeSlice : null, roleFilter: state.roleFilter}
-    body = state.tab === 'prep' ? prepView(view) : scoutView(view)
+    body = state.tab === 'prep' ? prepView(view) : state.tab === 'sheet' ? sheetView(view) : scoutView(view)
   }
   app.innerHTML = `${nav}${state.tab === 'method' ? '' : controls}<div class="view">${body}</div>`
   writeHash()
@@ -124,6 +124,7 @@ app.addEventListener('click', event => {
   else if (d.side) update({side: d.side as Side})
   else if (d.roleFilter) update({roleFilter: d.roleFilter as Role | 'all'})
   else if (d.gameTab) setSeries({...state.series, current: Number(d.gameTab)})
+  else if (d.action === 'print-sheet') window.print()
   else if (d.bestOf) {
     const bestOf = Number(d.bestOf) as 1 | 3 | 5
     const games = Array.from({length: bestOf}, (_, i) => state.series.games[i] ?? board.emptyGame(i % 2 ? 'red' : 'blue'))

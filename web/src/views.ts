@@ -1,6 +1,7 @@
 // The scouting report, the draft-prep page and the method page.
 import {html, meter, raw, roleBar, roleLabel, type Raw} from './html.ts'
 import {rift} from './rift.ts'
+import {sheetData} from './sheet.ts'
 import {banSuggestions, clock, contested, currentPlayers, insights, pct, priority, protect, type Suggestion} from './stats.ts'
 import type {FullSlice, Pack, Role, Team} from './types.ts'
 import {ROLES} from './types.ts'
@@ -178,6 +179,57 @@ export function scoutView(v: View): Raw {
   <section class="panel"><h3>Player pools</h3>${players(v)}</section>
   <section class="panel"><h3>Early macro: jungle and first objectives</h3>${objectives(v)}</section>
   <section class="panel"><h3>Evidence</h3>${evidence(v)}</section>`
+}
+
+export function sheetView(v: View): Raw {
+  const data = sheetData(v)
+  const team = data.team
+  const objectiveRate = (objective: typeof data.objectives[number]) =>
+    objective.rate == null ? '–' : `${objective.rate}% (${objective.took} of ${objective.games})`
+  return html`<article class="sheet">
+    <header class="sheet-head">
+      <div><h2>Scouting sheet: ${team.name}</h2><p class="scope">${scope(v)}</p></div>
+      <button type="button" data-action="print-sheet">Print sheet</button>
+    </header>
+    <div class="sheet-grid">
+      <div class="sheet-col">
+        <section class="sheet-block">
+          <h3>Team record</h3>
+          <p><b>${team.wins}–${team.losses}</b> · ${team.games} games</p>
+          <p>Blue: ${team.blue.wins}–${team.blue.games - team.blue.wins} (${team.blue.wins} wins in ${team.blue.games} games) · Red: ${team.red.wins}–${team.red.games - team.red.wins} (${team.red.wins} wins in ${team.red.games} games)</p>
+          <p>${team.firstDate} – ${team.lastDate}</p>
+        </section>
+        <section class="sheet-block">
+          <h3>Whiteboard insights</h3>
+          ${data.insights.length ? html`<ol>${data.insights.map(i => html`<li><p>${i.text}</p><small>${i.evidence}</small></li>`)}</ol>` : html`<p class="muted">Not enough games in this slice for clear habits.</p>`}
+        </section>
+        ${data.selfScout ? '' : html`<section class="sheet-block">
+          <h3>Ban targets</h3>
+          ${data.bans.length ? html`<ol>${data.bans.map(b => html`<li><b>${b.champ}</b> <small>${b.reason}</small></li>`)}</ol>` : html`<p class="muted">No clear ban targets in this slice.</p>`}
+        </section>
+        ${data.selfScout ? '' : html`<section class="sheet-block">
+          <h3>Protect picks</h3>
+          ${data.protect.length ? html`<ul>${data.protect.map(p => html`<li><b>${p.champ}</b> · ${p.player} (${roleLabel[p.role]}) <small>${p.games} games; banned ${p.banned} times</small></li>`)}</ul>` : html`<p class="muted">No repeated bans on our current picks in this slice.</p>`}
+        </section>`}`}
+      </div>
+      <div class="sheet-col">
+        <section class="sheet-block">
+          <h3>First-rotation picks</h3>
+          ${data.rotations.length ? html`<ul>${data.rotations.map(r => html`<li><b>${r.champ}</b> · ${pct(r.count, r.games)}% (${r.count} of ${r.games} games)</li>`)}</ul>` : html`<p class="muted">No first-rotation picks in this slice.</p>`}
+        </section>
+        <section class="sheet-block">
+          <h3>Current players</h3>
+          ${data.players.length ? html`<ul>${data.players.map(p => html`<li><b>${roleLabel[p.role]} · ${p.name}</b>${p.champs.length ? html`<ul>${p.champs.map(c => html`<li>${c.champ}: ${c.games} games, ${c.wins} wins · last ${c.last}</li>`)}</ul>` : html`<small>No champion sample</small>`}</li>`)}</ul>` : html`<p class="muted">No current players in this slice.</p>`}
+        </section>
+        <section class="sheet-block">
+          <h3>Jungle and first objectives</h3>
+          <p><b>Jungle starts</b></p>
+          ${data.jungleStarts.length ? html`<ul>${data.jungleStarts.map(j => html`<li>${j.name}: ${j.rate}% (${j.count} of ${j.games} games)</li>`)}</ul>` : html`<p class="muted">No observed starts in this slice.</p>`}
+          <ul>${data.objectives.map(o => html`<li>${o.label}: ${objectiveRate(o)}</li>`)}</ul>
+        </section>
+      </div>
+    </div>
+  </article>`
 }
 
 function suggestionList(list: Suggestion[]): Raw {

@@ -123,6 +123,19 @@ table.pool { width: 100%; border-collapse: collapse; margin-top: .4rem; font-siz
 table.pool th { text-align: left; font-weight: 600; }
 table.pool td { text-align: right; padding-left: .5rem; }
 
+.sheet { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; }
+.sheet-head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; margin-bottom: .75rem; }
+.sheet-head button { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: .4rem .8rem; cursor: pointer; }
+.sheet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.25rem; align-items: start; }
+.sheet-col { min-width: 0; }
+.sheet-block { break-inside: avoid; margin-bottom: .65rem; }
+.sheet-block h3 { margin-bottom: .25rem; }
+.sheet-block p { margin: .2rem 0; }
+.sheet-block ol, .sheet-block ul { margin: .2rem 0; padding-left: 1.15rem; }
+.sheet-block li { margin: .18rem 0; }
+.sheet-block li ul { margin: .1rem 0; }
+.sheet-block small { display: block; }
+
 .macro { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 1.25rem; align-items: start; }
 .rift { margin: 0; }
 .rift svg { width: 100%; height: auto; display: block; }
@@ -179,14 +192,30 @@ table.plan td.bad input { border-color: var(--warn); }
 
 @media (max-width: 860px) {
   .macro, .board { grid-template-columns: 1fr; }
+  .sheet-grid { grid-template-columns: 1fr; }
   .summary .wide { grid-column: auto; }
   select { min-width: 0; width: 100%; }
   .controls label { flex: 1 1 100%; }
 }
 @media print {
+  @page { size: auto; margin: .3in; }
   :root { color-scheme: light; --bg: #fff; --panel: #fff; --panel-2: #f3f5f9; --text: #111; --muted: #555; --line: #ccd; }
-  .tabs, .controls, .board-bar, .foot { display: none; }
-  .panel { break-inside: avoid; }
+  body { background: #fff; color: #111; }
+  .top, .tabs, .controls, .board-bar, .foot, .sheet-head button { display: none !important; }
+  main { max-width: none; margin: 0; padding: 0; }
+  .view { display: block; }
+  .sheet { border: 0; border-radius: 0; padding: 0; background: #fff; color: #111; font-size: 8pt; line-height: 1.2; break-inside: avoid; }
+  .sheet-head { display: block; margin: 0 0 5pt; }
+  .sheet h2 { font-size: 15pt; margin: 0 0 2pt; }
+  .sheet .scope { margin: 0; font-size: 7pt; }
+  .sheet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .2in; }
+  .sheet-block { margin-bottom: 5pt; padding-bottom: 3pt; border-bottom: .5pt solid #bbb; }
+  .sheet-block h3 { color: #111; font-size: 9pt; margin: 0 0 2pt; }
+  .sheet-block p, .sheet-block ol, .sheet-block ul { margin-top: 1pt; margin-bottom: 1pt; }
+  .sheet-block li { margin: 1pt 0; }
+  .sheet-block small, .sheet .muted, .sheet .scope { color: #444; font-size: 7pt; }
+  .sheet-block li small { display: inline; }
+  .sheet-block li ul small { display: block; }
 }
 .player.former { opacity: .6; }
 .draft-col input, table.plan input { background: var(--bg); }

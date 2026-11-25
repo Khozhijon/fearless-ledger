@@ -30,6 +30,10 @@ gank before 8:00, and what Cloud9 should ban. Every number shows how many games 
 - **Draft prep, Cloud9 Kia vs the opponent.** Ranked ban targets with the reason for each, our
   comfort picks they tend to ban ("protect"), champions both teams' players want by role, and
   their first-rotation picks.
+- **Scouting sheet.** One printable page per opponent for the booth: record by side, the top five
+  habits with their evidence, ban targets and our picks to protect, first-rotation picks, each
+  current player's top three champions, jungle starts and first-objective rates, every rate with
+  its count. "Print sheet" fits it on one Letter or A4 page.
 - **Fearless series board.** Record each game's bans and picks as the series is played. The board
   locks every champion already picked in the series, shows what each of the ten players has left
   (most-played first), re-ranks the ban targets for the next game from what is still available,
@@ -95,7 +99,8 @@ not endorsed by Riot Games, Cloud9 or GRID.
 
 ## Built with
 
-PyCharm 2026.3 (JetBrains) and Claude Code; see [TOOLING.md](TOOLING.md) for exactly what each did
+PyCharm 2026.3 and WebStorm 2026.3 with JetBrains Air and the Junie agent (JetBrains), and Claude
+Code; see [TOOLING.md](TOOLING.md) for exactly what each did
 and [AI_SHOWCASE.md](AI_SHOWCASE.md) for the AI-assisted workflow.
 
 MIT licence.
