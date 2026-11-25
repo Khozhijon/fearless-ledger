@@ -8,7 +8,7 @@ const path = require('node:path')
 
 const root = path.join(__dirname, '..', '..')
 const tmp = path.join(root, 'submission', 'video-tmp')
-const out = path.join(root, 'submission', 'fearless-ledger-demo.mp4')
+const out = process.env.OUT ?? path.join(root, 'submission', 'fearless-ledger-demo.mp4')
 const timeline = JSON.parse(fs.readFileSync(path.join(tmp, 'timeline.json'), 'utf8'))
 
 const args = ['-y', '-i', path.join(tmp, 'screen.webm')]

@@ -118,7 +118,14 @@ const actions = {
     await setInput(page, '[data-plan="mid"][data-game="2"]', 'Taliyah')
     await setInput(page, '[data-plan="bot"][data-game="2"]', 'Orianna')
   },
+  sheet: async (page, ms) => {
+    await page.click('[data-tab="sheet"]')
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await pause(ms * 0.5)
+    await page.evaluate(() => window.scrollTo({top: 420, behavior: 'smooth'}))
+  },
   built: async page => page.goto(`${slides}?s=built`),
+  air: async page => page.goto(`${slides}?s=air`),
   close: async page => page.goto(`${slides}?s=close`),
 }
 

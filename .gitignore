@@ -24,3 +24,4 @@ submission/DEVPOST.md
 inspections/
 .venv/
 submission/*.mp4
+.cache/
